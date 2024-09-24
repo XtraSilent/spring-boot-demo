@@ -61,7 +61,7 @@ public class TodoController {
 	@PutMapping
 	public ResponseEntity<?> updateTodo(@RequestBody Todo todo) {
 		try {
-			Optional<Todo> res = todoService.findById(todo.getId());
+			Optional<Todo> res = Optional.ofNullable(todoService.findById(todo.getId()));
 			if (res.isPresent()) {
 				Todo updatedTodo = todoService.save(todo);
 				logger.info("Todo update: {}", updatedTodo);
@@ -79,7 +79,7 @@ public class TodoController {
 	@DeleteMapping
 	public ResponseEntity<?> deleteTodo(@RequestBody Todo todo) {
 		try {
-			Optional<Todo> res = todoService.findById(todo.getId());
+			Optional<Todo> res = Optional.ofNullable(todoService.findById(todo.getId()));
 			if (res.isPresent()) {
 				todoService.deleteById(todo.getId());
 				logger.info("Todo delete =>", "success");
